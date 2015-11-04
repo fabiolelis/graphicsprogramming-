@@ -2,15 +2,129 @@
 <html>
   <head>
     <style type="text/css"></style>
-    <title>Graphics project</title>
+    <title>Graphics project - Road Fighter</title>
+      
+      <script type="text/javascript" src="jquery-2.1.4.min.js"></script>  
   </head>
   <body>
-    <canvas id="gamecanvas"></canvas>
-    <script type="text/javascript">
-      
-      window.addEventListener("keydown",                function(event) { 
     
-      });
+
+    <canvas id="gamecanvas">
+</canvas>
+    <script type="text/javascript">
+    
+        var LEFT = 0, MIDDLE = 1, RIGHT = 2; 
+        var LEFT_ARROW = 37, RIGHT_ARROW = 39, SPACEBAR = 32;
+        var currentPos = RIGHT;
+        
+        var c=document.getElementById("gamecanvas");
+        var ctx=c.getContext("2d");
+        
+        
+        //lanes: 20-60,65-105,110-150
+        //car 30-50 75-95 120-140
+        
+        ctx.clearRect (0, 0, c.width, c.height);
+        drawnRoad();
+        drawnCar(currentPos);
+
+        
+        window.addEventListener("keydown",
+            function(event) { 
+                ctx.clearRect (0, 0, c.width, c.height);
+                drawnRoad();
+                switch(event.keyCode)
+                {
+                    case LEFT_ARROW:
+                      currentPos = Math.max(--currentPos,0);
+                      break;
+                    
+                    case RIGHT_ARROW:
+                      currentPos = Math.min(++currentPos,2);
+                      break;
+                    
+                    
+                    //case space bar speedup:
+                        
+                    
+                }
+            
+                drawnCar(currentPos);
+            }
+        );
+        
+        
+        function drawnRoad()
+        {
+            
+            var w = $(window).width();
+            var h = $(window).height();
+            $("#gamecanvas").css("width", w + "px");
+            $("#gamecanvas").css("height", h + "px"); 
+
+            //grass
+            ctx.beginPath();
+            var my_gradient=ctx.createLinearGradient(0,0,0,170);
+            my_gradient.addColorStop(0,"green");
+            my_gradient.addColorStop(1,"white");
+            ctx.fillStyle= my_gradient;
+            //ctx.fillStyle = "green";
+            ctx.fillRect(0,0,document.body.clientWidth-20,350); 
+            ctx.stroke();
+
+            //road
+            ctx.beginPath();
+            //ctx.lineWidth = "6px";
+            //ctx.strokeStyle = "red";
+            ctx.fillStyle = "#bbbbbb";
+            ctx.fillRect(15,0,150,350); 
+            ctx.stroke();
+
+        }
+        
+        function drawnCar(pos) {//0,1,2 (left,middle,right)
+            
+            var x = getPosXfrom(pos);
+            ctx.beginPath();
+            ctx.fillStyle = "red";
+            ctx.fillRect(x,100,20,40); 
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.fillStyle = "#000000";
+            ctx.fillRect(x,102,4,8); 
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.fillStyle = "#000000";
+            ctx.fillRect(x+16,102,4,8); 
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.fillStyle = "#000000";
+            ctx.fillRect(x,130,4,8); 
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.fillStyle = "#000000";
+            ctx.fillRect(x+16,130,4,8); 
+            ctx.stroke();
+            
+            
+        }
+        
+        
+        function getPosXfrom(pos)
+        {
+            return (pos*45)+30;
+        }
+        
+      
+        
     </script>
+      
   </body>
 </html>
+
+
+
