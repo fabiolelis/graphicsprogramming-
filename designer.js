@@ -145,9 +145,11 @@
             ctx.fillText("Road Game!",xInstructions,250);
             ctx.fillStyle="#ffffff";
             ctx.font="20px Georgia";
-            ctx.fillText("Use arrow keys to",xInstructions,280);
-            ctx.fillText("move the car left and right",xInstructions,300);
-            ctx.fillText("Use space to speed up",xInstructions,340);
+            
+            ctx.fillText("Use space to start/pause",xInstructions,280);
+
+            ctx.fillText("Use up arrow keys to",xInstructions,320);
+            ctx.fillText("move the car left, right or faster",xInstructions,340);
             if(toDrawNewPhase)
                 ctx.fillStyle="yellow";
             
@@ -171,7 +173,10 @@
                 ctx.fillStyle="red";
                 ctx.font="50px Georgia";
                 ctx.fillText("Game Over",c.width - 600,480);
-
+                ctx.fillStyle="yellow";
+                ctx.font="20px Georgia";
+                ctx.fillText("Space bar to Restart",c.width - 600,520);
+                
                 ctx.beginPath();
                 ctx.arc(getPosXfrom(currentPos), MYCAR_Y, 100, 0, 2 * Math.PI, false);
                 var my_gradient=ctx.createRadialGradient(getPosXfrom(currentPos),MYCAR_Y,5,getPosXfrom(currentPos),MYCAR_Y,100);
@@ -183,6 +188,7 @@
 
             }
         }
+
         
         function reDrawn()
         {
@@ -198,6 +204,6 @@
         //pos 
         function getPosXfrom(pos)
         {
-            return (currentPos*DESLOC)+ROADX;
+            return Math.min((currentPos*DESLOC)+ROADX, 495);
         }
         

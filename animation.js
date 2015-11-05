@@ -1,11 +1,13 @@
   
         var LEFT = 0, MIDDLE = 1, RIGHT = 2; 
-        var LEFT_ARROW = 37, RIGHT_ARROW = 39, SPACEBAR = 32;
+        var LEFT_ARROW = 37, RIGHT_ARROW = 39, DOWN_ARROW = 40, UP_ARROW = 38, SPACEBAR = 32;
         var NUM_PHASE = 10, NUM_CARS_PHASE = 3, MIN_DISTANCE = 100;
-        var turbo = false, speed = 2, phase = 1, life=3;
+        var turbo = false, speed = 2, phase = 1, life=3, pause = true;
 
-        
+
+                        
         function initPhase(){
+                   
             posX = Math.floor((Math.random() * 395) + 105);
             posY = -200;
             colourIndex = Math.floor(Math.random() * 6);
@@ -33,7 +35,7 @@
             reDrawn();
             drawMyCar(currentPos);
             drawCars();
-            if(!toDrawGameOver){
+            if(!toDrawGameOver && !pause){
                 goDownCars();
 
                 if(cars[cars.length-1].positionY > c.height){
@@ -98,14 +100,15 @@
                       break;
                     
                     case RIGHT_ARROW:
-                      currentPos = Math.min(++currentPos,10);
+                      currentPos = Math.min(++currentPos,9);
+                      break;
+                        
+                    case UP_ARROW:
+                      turbo = true;
                       break;
                     
                     //case space bar speedup:
-                    case SPACEBAR:
-                      
-                      turbo = true;
-                      break;
+                    
                                             
                 }
             }
@@ -117,9 +120,40 @@
              function(event) { 
                 switch(event.keyCode)
                 {
-                    case SPACEBAR:     
+                    case UP_ARROW:     
                       turbo = false;
+                      break;
+
+                }
+            }
+        );
+
+        window.addEventListener("keypress",
+             function(event) { 
+                switch(event.keyCode)
+                {
+                    case SPACEBAR:
+                      if(!toDrawGameOver)
+                        pause = !pause;
+                      else{
+                          phase = 1;
+                          speed = 2;
+                          toDrawGameOver = false;
+                          points = 0;
+                          life = 3;
+                          initPhase();
+                      }
                       break;
                 }
             }
         );
+/*
+        window.addEventListener("click", on_click, false);
+
+        function on_click(e) {
+            if (inLink())  {
+                location.reload();
+            }
+        }
+
+*/

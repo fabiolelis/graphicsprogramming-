@@ -16,13 +16,16 @@ http://stackoverflow.com/questions/4037212/html-canvas-full-screen
 http://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_canvas_createradialgradient
 
 TO FIX:
-Horizontal Scrollbar
+Horizontal Scrollbar ok
 
 Link to (Re)Start
 
-Pause
+Pause ok
 
-Share on twitter why not haha
+Sounds
+
+right border
+
 
 
 

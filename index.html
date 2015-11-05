@@ -39,10 +39,18 @@
         var colours = new Array("blue", "yellow", "green", "black", "brown", "white");
         
         //put cars for this phase: with negative Y and random X (105 - 495)
-           
+        
+        $('html, body').css({
+            'overflow': 'hidden',
+            'height': '100%'
+        });
+        
         var posX, posY, colourIndex, cars;
         initPhase();    
         window.requestAnimationFrame(carsDown);
+        
+        //var snd = new Audio("sounds/explosion.wav"); // buffers automatically when created
+        //snd.play();
             
       
        
