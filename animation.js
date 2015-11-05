@@ -2,8 +2,9 @@
         //Constants, flags and global variables 
         var LEFT = 0, MIDDLE = 1, RIGHT = 2; 
         var LEFT_ARROW = 37, RIGHT_ARROW = 39, DOWN_ARROW = 40, UP_ARROW = 38, SPACEBAR = 32;
-        var NUM_PHASE = 10, NUM_CARS_PHASE = 3, MIN_DISTANCE = 100;
+        var NUM_PHASE = 10, NUM_CARS_PHASE = 10, MIN_DISTANCE = 100;
         var turbo = false, speed = 2, phase = 1, life=3, pause = true;
+        var breakTank = 0, slowDown=false;
 
 
                         
@@ -39,7 +40,11 @@
             drawMyCar(currentPos);
             drawCars();
             if(!toDrawGameOver && !pause){
+                if(!slowDown && breakTank < 1000)
+                    breakTank+=speed;
+
                 goDownCars();
+
                 //check new phase
                 if(cars[cars.length-1].positionY > c.height){
                     phase++;
@@ -59,10 +64,16 @@
             //move the cars down
             cars.forEach(
                 function(car, i){
-                    if(!turbo)    
-                        car.positionY += car.speed;
-                    else
+                    if(turbo)
                         car.positionY += (car.speed > 10 ? car.speed*2 : 10);
+
+                    else if(slowDown && breakTank > 0){    
+                        car.positionY += car.speed/2;
+                        breakTank--;
+                    }
+                    
+                    else
+                        car.positionY += car.speed;
                     
                     if(car.positionY >  c.height && !car.gone){
                         points += phase;
@@ -110,6 +121,11 @@
                     case UP_ARROW:
                       turbo = true;
                       break;
+
+                    case DOWN_ARROW:
+                      slowDown = true;
+                      break;
+                    
                                         
                                             
                 }
@@ -124,6 +140,9 @@
                 {
                     case UP_ARROW:     
                       turbo = false;
+                      break;
+                    case DOWN_ARROW:     
+                      slowDown = false;
                       break;
 
                 }
@@ -144,6 +163,7 @@
                           toDrawGameOver = false;
                           points = 0;
                           life = 3;
+                          breakTank = 0;
                           initPhase();
                       }
                       break;

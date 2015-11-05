@@ -152,13 +152,31 @@
             
             ctx.fillText("Phase: " + phase + " | Speed: " + speed,xInstructions,380);
             ctx.fillText("Points: " + points + " ",xInstructions,400);
+            ctx.fillStyle="#ffffff";
             ctx.fillText("Life: " + life + " ",xInstructions,420);
+            if(slowDown){
+                ctx.fillStyle="red";
+            }
+    
+
+            //BREAK:
+            ctx.fillText("Break tank: ",xInstructions,460);
+            ctx.beginPath();
+            ctx.fillStyle = "#grey";
+            ctx.fillRect(xInstructions+120,445,breakTank/10,20); 
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.strokeStyle = "#grey";
+            ctx.rect(xInstructions+120,445,100,20); 
+            ctx.stroke();
+
             
             
             if(toDrawNewPhase){
                 ctx.fillStyle="#ffffff";
                 ctx.font="72px Georgia";
-                ctx.fillText("Phase "+ phase +" !",c.width - 600,500);
+                ctx.fillText("Phase "+ phase +" !",c.width - 600,520);
             }
             
             
@@ -169,10 +187,10 @@
             if(toDrawGameOver){
                 ctx.fillStyle="red";
                 ctx.font="50px Georgia";
-                ctx.fillText("Game Over",c.width - 600,480);
+                ctx.fillText("Game Over",c.width - 600,520);
                 ctx.fillStyle="yellow";
                 ctx.font="20px Georgia";
-                ctx.fillText("Space bar to Restart",c.width - 600,520);
+                ctx.fillText("Space bar to Restart",c.width - 600,580);
                 
                 //draw explosion
                 ctx.beginPath();
