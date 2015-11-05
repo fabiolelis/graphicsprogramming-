@@ -16,12 +16,12 @@ Hold arrow key up to make the car go faster.
 
 
 ###Rules and Pontuation:
-You drive a car in the wrong way and yout challenge is avoid all the others vehicles comming against you.
-Each 10 cars you avoid, new phase: speed up.
-Bored? Arrow up key and use your turbo.
-Rush? Arrow down and slow down (whatch your breaktank).
+You drive a car in the wrong way and your challenge is avoid all the others vehicles comming against you. <br/>
+Each 10 cars you avoid, new phase: speed up.<br/>
+Bored? Arrow up key and use your turbo.<br/>
+Rush? Arrow down and slow down (whatch your breaktank).<br/>
 
-You have three lives.
+You have three lives.<br/>
 
 ##Now lets see how long can you drive!
 
