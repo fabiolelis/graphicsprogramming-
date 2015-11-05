@@ -6,6 +6,9 @@
       
       <script type="text/javascript" src="jquery-2.1.4.min.js"></script>  
       <script type="text/javascript" src="designer.js"></script>  
+      <script type="text/javascript" src="animation.js"></script>  
+      <script type="text/javascript" src="collisions.js"></script>  
+
       
   </head>
   <body>
@@ -16,17 +19,14 @@
       
     <script type="text/javascript">
     
-        var LEFT = 0, MIDDLE = 1, RIGHT = 2; 
-        var LEFT_ARROW = 37, RIGHT_ARROW = 39, SPACEBAR = 32;
-        var currentPos = RIGHT;
-        var NUM_PHASE = 10, NUM_CARS_PHASE = 10, MIN_DISTANCE = 100;
-        var turbo = false, speed = 2, phase = 1;
         
+        var currentPos = RIGHT;
+       
         //road 100-550
         
         var c=document.getElementById("gamecanvas");
         var ctx=c.getContext("2d");        
-        c.width=1280;//horizontal resolution (?) - increase for better looking text
+        c.width=1250;//horizontal resolution (?) - increase for better looking text
         c.height=744;//vertical resolution (?) - increase for better looking text
         
         function Car(positionX, positionY, speed, colour){
@@ -34,114 +34,17 @@
             this.positionY = positionY;
             this.speed = speed;
             this.colour = colour;
+            this.gone = false;
         }
-        var cars = new Array();
         var colours = new Array("blue", "yellow", "green", "black", "brown", "white");
         
         //put cars for this phase: with negative Y and random X (105 - 495)
+           
+        var posX, posY, colourIndex, cars;
+        initPhase();    
+        window.requestAnimationFrame(carsDown);
             
-        //while(phase < NUM_PHASE){
-
-            var posX = Math.floor((Math.random() * 395) + 105);
-            var posY = -200;
-            var colourIndex = Math.floor(Math.random() * 6);
-
-            cars.push(new Car(posX, posY, speed, colours[colourIndex]));
-
-            for(var i = 1; i < NUM_CARS_PHASE; i++){
-                posX = Math.floor((Math.random() * 395) + 105);
-                posY = cars[i-1].positionY - Math.floor((Math.random() * 500) + MIN_DISTANCE);
-                colourIndex = Math.floor(Math.random() * 6);
-
-                cars.push(new Car(posX, posY, speed, colours[colourIndex]));
-            }
-
-
-            ctx.clearRect (0, 0, c.width, c.height);
-            reDrawn();
-            drawMyCar(currentPos);
-            drawCars();
-
-            window.requestAnimationFrame(carsDown);
-            
-       // }
-        
-        function carsDown() {
-            ctx.clearRect(0, 0, c.width, c.height);
-            reDrawn();
-            drawMyCar(currentPos);
-            drawCars();
-            goDownCars();
-            
-            /*if(cars[cars.length-1].positionY > c.height){
-                phase++;
-                speed = phase*2;
-                cars = new Array();
-                return;
-                
-            }*/
-
-            window.requestAnimationFrame(carsDown);
-        }
-        
-        function goDownCars(){
-            cars.forEach(
-                function(car, i){
-                    if(!turbo)    
-                        car.positionY += car.speed;
-                    else
-                        car.positionY += (car.speed > 10 ? car.speed*2 : 10);
-                    
-                }
-            );
-        }
-
-        function drawCars(){
-            
-            cars.forEach(function(car, i){
-                    drawCar(car.positionX, car.positionY, car.colour);
-                }
-            );
-            drawMyCar(currentPos);
-        }
-        
-        
-        //event
-        window.addEventListener("keydown",
-            function(event) { 
-            
-                switch(event.keyCode)
-                {
-                    case LEFT_ARROW:
-                      currentPos = Math.max(--currentPos,0);
-                      break;
-                    
-                    case RIGHT_ARROW:
-                      currentPos = Math.min(++currentPos,10);
-                      break;
-                    
-                    //case space bar speedup:
-                    case SPACEBAR:
-                      
-                      turbo = true;
-                      break;
-                                            
-                }
-            }
-                
-            
-        );
-        
-         window.addEventListener("keyup",
-             function(event) { 
-                switch(event.keyCode)
-                {
-                    case SPACEBAR:     
-                      turbo = false;
-                      break;
-                }
-            }
-        );
+      
        
     </script>
       
