@@ -23,12 +23,13 @@
         var currentPos = RIGHT;
        
         //road 100-550
-        
+        //init Canvas and set a desirable size
         var c=document.getElementById("gamecanvas");
         var ctx=c.getContext("2d");        
-        c.width=1250;//horizontal resolution (?) - increase for better looking text
-        c.height=744;//vertical resolution (?) - increase for better looking text
+        c.width=1250;
+        c.height=744;
         
+        //Class car
         function Car(positionX, positionY, speed, colour){
             this.positionX = positionX;
             this.positionY = positionY;
@@ -36,23 +37,22 @@
             this.colour = colour;
             this.gone = false;
         }
+        //arrar for random colours
         var colours = new Array("blue", "yellow", "green", "black", "brown", "white");
         
-        //put cars for this phase: with negative Y and random X (105 - 495)
         
+        //Disables scrolling to prevent instability on the screen
         $('html, body').css({
             'overflow': 'hidden',
             'height': '100%'
         });
         
+        //Get ready
         var posX, posY, colourIndex, cars;
         initPhase();    
         window.requestAnimationFrame(carsDown);
         
-        //var snd = new Audio("sounds/explosion.wav"); // buffers automatically when created
-        //snd.play();
-            
-      
+        
        
     </script>
       

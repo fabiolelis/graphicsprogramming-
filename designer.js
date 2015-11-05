@@ -1,4 +1,4 @@
-
+        //Constants, flags and global variables 
         var toDrawNewPhase = false;
         var toDrawGameOver = false;
         var MYCAR_Y = 600;
@@ -17,7 +17,6 @@
             my_gradient.addColorStop(0,"#002200");
             my_gradient.addColorStop(1,"#00dd00");
             ctx.fillStyle= my_gradient;
-            //ctx.fillStyle = "green";
             ctx.fillRect(0,0,c.width,c.height); 
             ctx.stroke();
 
@@ -50,7 +49,6 @@
 
         }
         
-                
         //lanes: 101-250,251-400,401-550
         //car 125-225 275-375 425-525
         
@@ -96,7 +94,6 @@
 
         function drawCar(posX, posY, colour) {
             
-            //var x = getPosXfrom(posX);
             var x = posX;
             ctx.beginPath();
             ctx.fillStyle = colour;
@@ -177,6 +174,7 @@
                 ctx.font="20px Georgia";
                 ctx.fillText("Space bar to Restart",c.width - 600,520);
                 
+                //draw explosion
                 ctx.beginPath();
                 ctx.arc(getPosXfrom(currentPos), MYCAR_Y, 100, 0, 2 * Math.PI, false);
                 var my_gradient=ctx.createRadialGradient(getPosXfrom(currentPos),MYCAR_Y,5,getPosXfrom(currentPos),MYCAR_Y,100);
@@ -198,10 +196,6 @@
             
         }
         
-        
-         //lanes: 101-250,251-400,401-550
-        //car 150-200 300-350 450-500
-        //pos 
         function getPosXfrom(pos)
         {
             return Math.min((currentPos*DESLOC)+ROADX, 495);

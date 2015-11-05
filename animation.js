@@ -1,4 +1,5 @@
   
+        //Constants, flags and global variables 
         var LEFT = 0, MIDDLE = 1, RIGHT = 2; 
         var LEFT_ARROW = 37, RIGHT_ARROW = 39, DOWN_ARROW = 40, UP_ARROW = 38, SPACEBAR = 32;
         var NUM_PHASE = 10, NUM_CARS_PHASE = 3, MIN_DISTANCE = 100;
@@ -7,7 +8,8 @@
 
                         
         function initPhase(){
-                   
+            
+            //Put the cars on random colours and positions       
             posX = Math.floor((Math.random() * 395) + 105);
             posY = -200;
             colourIndex = Math.floor(Math.random() * 6);
@@ -23,7 +25,7 @@
                 cars.push(new Car(posX, posY, speed, colours[colourIndex]));
             }
 
-
+            //draw the cars up to the screen (negative Y)
             ctx.clearRect (0, 0, c.width, c.height);
             reDrawn();
             drawMyCar(currentPos);
@@ -31,13 +33,14 @@
         }
         
         function carsDown() {
+            //animation
             ctx.clearRect(0, 0, c.width, c.height);
             reDrawn();
             drawMyCar(currentPos);
             drawCars();
             if(!toDrawGameOver && !pause){
                 goDownCars();
-
+                //check new phase
                 if(cars[cars.length-1].positionY > c.height){
                     phase++;
                     speed = (toDrawGameOver ?  0 : phase*2);
@@ -53,6 +56,7 @@
         }
         
         function goDownCars(){
+            //move the cars down
             cars.forEach(
                 function(car, i){
                     if(!turbo)    
@@ -89,7 +93,7 @@
         }
 
        
-        //event
+        //events
         window.addEventListener("keydown",
             function(event) { 
             
@@ -106,9 +110,7 @@
                     case UP_ARROW:
                       turbo = true;
                       break;
-                    
-                    //case space bar speedup:
-                    
+                                        
                                             
                 }
             }
@@ -136,6 +138,7 @@
                       if(!toDrawGameOver)
                         pause = !pause;
                       else{
+                        //restart
                           phase = 1;
                           speed = 2;
                           toDrawGameOver = false;
@@ -147,13 +150,4 @@
                 }
             }
         );
-/*
-        window.addEventListener("click", on_click, false);
 
-        function on_click(e) {
-            if (inLink())  {
-                location.reload();
-            }
-        }
-
-*/

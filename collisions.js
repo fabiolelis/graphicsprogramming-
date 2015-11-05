@@ -1,3 +1,5 @@
+//Get if the red car hits another one
+
  function checkCollision(car){
     var myCarX = getPosXfrom(currentPos);
     var myCarY = MYCAR_Y;
